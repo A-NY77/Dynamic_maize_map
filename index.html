@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cultivation of Maize crops in Africa</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.3.0/ol.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ol@7.3.0/dist/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h2>Cultivation of Maize crops in Africa</h2>
+    <p>Maize production from the year 1961 to 2023</p>
+  </header>
+
+  <div id="mainPanel">
+    <div id="mapContainer">
+      <div id="mapA" class="map">
+        <div class="slider-container">
+          <label><strong>Year:</strong></label>
+          <strong style="margin-right:10px;">Year:</strong>
+          <input type="range" id="yearA" min="1961" max="2023" value="1994" />
+          <span id="yearLabelA">1994</span>
+        </div>
+      </div>
+
+      <div id="mapB" class="map">
+        <div class="slider-container">
+          <label><strong>Year:</strong></label>
+          <input type="range" id="yearB" min="1961" max="2023" value="2023" />
+          <span id="yearLabelB">2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="legendPanel">
+      <label><strong>Mode:</strong></label>
+      <select id="mapMode">
+        <option value="yield">Yield</option>
+        <option value="bivariate">Yield + Area Grown </option>
+        <option value="dotdensity">Yield + Area Harvested</option>
+      </select>
+
+      <div id="legendControls" class="legend-box">
+        <div id="legendToggles">
+          <label><input type="checkbox" id="showyield" checked> Yield</label>
+          <label style="margin-left:8px;"><input type="checkbox" id="showArea" checked> Area harvested</label>
+        </div>
+        <!-- JS replaces everything that follows on every refresh -->
+        <div id="legendBody"></div>
+      </div>
+      <div id="legendBox"></div>
+      <div id="legendA" class="legend-box"></div>
+      <div id="legendB" class="legend-box"></div>
+
+      <div style="margin-top: 20px; font-size: 11px; color: #777;">
+        <p><em>Note:</em> Maize production data (1961–2023) were collected from national official sources using questionaires. Missing values 
+        and data from countries that had not attained independence yet were generated using FAO’s ensemble imputation
+        methodology to address gaps in national reporting. Minor discrepancies may persist, particularly for earlier years or
+        regions with limited data availability.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="tooltip"></div>
+  <script src="./proj4.js"></script>
+  <script src="./dual.js"></script>
+
+
+
+
+  <script>
+    // Show legend controls only for bivariate mode
+    document.getElementById('mapMode').addEventListener('change', () => {
+      const val = document.getElementById('mapMode').value;
+      document.getElementById('legendControls').style.display = val === 'bivariate' ? 'block' : 'none';
+    });
+  </script>
+</body>
+</html>
